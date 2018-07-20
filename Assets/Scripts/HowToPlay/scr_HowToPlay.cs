@@ -5,8 +5,13 @@ using UnityEngine.SceneManagement;
 
 public class scr_HowToPlay : MonoBehaviour {
 
-    public void gotoMainMenu()
+    public void openHTP()
     {
-        SceneManager.LoadScene("MainMenu");
+        GameObject.Find("Canvas").transform.Find("HTP").gameObject.SetActive(true);
+    }
+
+    public void closeHTP()
+    {
+        GameObject.Find("Canvas").transform.Find("HTP").gameObject.SetActive(false);
     }
 }

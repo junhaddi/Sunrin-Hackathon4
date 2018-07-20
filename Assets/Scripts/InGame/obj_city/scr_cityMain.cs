@@ -88,10 +88,6 @@ public class scr_cityMain : MonoBehaviour {
         }
 
         //  Change Target Color
-        if (isTarget)
-            GetComponent<SpriteRenderer>().color = new Color(1, 1, 1);
-        else
-            GetComponent<SpriteRenderer>().color = new Color(0.75f, 0.75f, 0.75f);
         
         if (peoples * 6 / (165 / _citiAmount.cityAmount) > 4)
         {
@@ -110,7 +106,7 @@ public class scr_cityMain : MonoBehaviour {
         float y = other_city.transform.position.y - transform.position.y;
 
         GameObject line = Instantiate(Line, new Vector3((other_city.transform.position.x + transform.position.x) / 2, (other_city.transform.position.y + transform.position.y) / 2, 2), Quaternion.Euler(0, 0, Mathf.Atan2(y, x) * Mathf.Rad2Deg));
-        line.transform.localScale = new Vector2(Vector3.Distance(other_city.transform.position, transform.position) / 4f * 10f, scale / 14f);
+        line.transform.localScale = new Vector2(Vector3.Distance(other_city.transform.position, transform.position) / 4f * 10f, scale / 20f);
 
         switch(cityNum % 7)
         {

@@ -62,9 +62,9 @@ public class scr_managerMain : MonoBehaviour {
     IEnumerator mainCoroutine()
     {
         //---------------------------------------------------------------[[ 검은 화면이 사라지는 부분 ]]
-        for (int i = 100; i >= 0; i-=2)
+        for (int i = 100; i >= 0; i-=3)
         {
-            blackpanel_image.color = new Color(0, 0, 0, i / 100f);
+            blackpanel_image.color = new Color(0.09f, 0, 0.09f, i / 100f);
             yield return new WaitForSeconds(0.005f);
         }
         blackpanel_image.color = new Color(0, 0, 0, 0);
@@ -76,7 +76,7 @@ public class scr_managerMain : MonoBehaviour {
     private void Update()
     {
         //  Set UI
-        _Score.text = "Score\n" + score;
+        _Score.text = score + "";
         _happy_bar.fillAmount = happyPoint;
         SetHappyPoint();
     }
