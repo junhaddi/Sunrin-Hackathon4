@@ -11,6 +11,7 @@ public class scr_cityMain : MonoBehaviour {
     public int cityNum = 0;
     public bool isTarget = false;
     public float peoples = 50;
+    public int matter = 0;
 
     public bool pro_crash = false;
     public bool pro_house = false;
@@ -19,6 +20,8 @@ public class scr_cityMain : MonoBehaviour {
 
     scr_managerMain managerMain;
     scr_managerCity managerCity;
+    scr_managerCity _citiAmount;
+    scr_managerMain GetScore;
 
     public float moveRate;
     public float nextMove = 0;
@@ -40,6 +43,10 @@ public class scr_cityMain : MonoBehaviour {
                 MovePeople((int)(people1 + people2 / 2 * 0.8f));
             }
             managerMain.thisCity = null;
+
+            //  Get Score
+            GetScore.score += 1;
+            Debug.Log(GetScore.score);
         }
     }
 
@@ -58,13 +65,16 @@ public class scr_cityMain : MonoBehaviour {
         text = transform.Find("Text").GetComponent<TextMesh>();
         managerMain = GameObject.Find("MainManager").GetComponent<scr_managerMain>();
         managerCity = GameObject.Find("CityManager").GetComponent<scr_managerCity>();
+        _citiAmount = GameObject.Find("CityManager").GetComponent<scr_managerCity>();
+        GetScore = GameObject.Find("MainManager").GetComponent<scr_managerMain>();
     }
 
     private void Update()
     {
         //  Set Move DelayLate
-        moveRate = 8f / GameObject.Find("CityManager").GetComponent<scr_managerCity>().cityAmount;
+        moveRate = 8f / _citiAmount.cityAmount;
 
+        //  Change Target Color
         if (isTarget)
             GetComponent<SpriteRenderer>().color = new Color(1, 1, 1);
         else
