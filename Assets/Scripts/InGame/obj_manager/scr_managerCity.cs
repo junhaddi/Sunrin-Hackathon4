@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class scr_managerCity : MonoBehaviour {
 
-    public int cityAmount;
+    public int cityAmount = 1;
     public float newTargetDelay = 0;
     public float peopleMoveDelay = 0;
     GameObject cities;
@@ -13,6 +13,7 @@ public class scr_managerCity : MonoBehaviour {
 
     public void Awake()
     {
+        cityAmount = 1;
         cities = GameObject.Find("Cities");
     }
 

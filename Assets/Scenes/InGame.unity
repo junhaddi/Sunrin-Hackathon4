@@ -650,7 +650,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   score: 0
+  cityMany: 0
   happyPoint: 0
+  thisCity: {fileID: 0}
 --- !u!1 &1976654691
 GameObject:
   m_ObjectHideFlags: 0

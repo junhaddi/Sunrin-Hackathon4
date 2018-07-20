@@ -17,9 +17,34 @@ public class scr_cityMain : MonoBehaviour {
     public bool pro_road = false;
     public bool pro_env = false;
 
+    scr_managerMain managerMain;
+    scr_managerCity managerCity;
+
+    private void OnMouseUp()
+    {
+        if (managerMain.thisCity)
+        {
+            other_city = managerMain.thisCity;
+            MovePeople(35/(managerCity.cityAmount + 1));
+            managerMain.thisCity = null;
+        }
+    }
+
+    private void OnMouseEnter()
+    {
+        managerMain.thisCity = gameObject;
+    }
+
+    private void OnMouseExit()
+    {
+        managerMain.thisCity = null;
+    }
+
     private void Awake()
     {
         text = transform.Find("Text").GetComponent<TextMesh>();
+        managerMain = GameObject.Find("MainManager").GetComponent<scr_managerMain>();
+        managerCity = GameObject.Find("CityManager").GetComponent<scr_managerCity>();
     }
 
     private void Update()
@@ -48,7 +73,7 @@ public class scr_cityMain : MonoBehaviour {
                 peoples--;
                 other_cityMain.peoples++;
             }
-            yield return new WaitForSeconds(0.04f);
+            yield return new WaitForSeconds(0.06f);
         }
     }
 }
