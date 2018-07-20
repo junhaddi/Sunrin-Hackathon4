@@ -11,6 +11,7 @@ public class scr_cityMain : MonoBehaviour {
     TextMesh text;
 
     public GameObject other_city;
+    Transform mask;
 
     public int cityNum = 0;
     public bool isTarget = false;
@@ -66,6 +67,7 @@ public class scr_cityMain : MonoBehaviour {
 
     private void Awake()
     {
+        mask = transform.Find("Mask");
         text = transform.Find("Text").GetComponent<TextMesh>();
         managerMain = GameObject.Find("MainManager").GetComponent<scr_managerMain>();
         managerCity = GameObject.Find("CityManager").GetComponent<scr_managerCity>();
@@ -92,6 +94,8 @@ public class scr_cityMain : MonoBehaviour {
         else
             GetComponent<SpriteRenderer>().color = new Color(0.5f, 0.5f, 0.5f);
         text.text = peoples + "%";
+        mask.localScale = new Vector2(4, peoples * 6 / (165 / _citiAmount.cityAmount));
+        mask.localPosition = new Vector2(0, (mask.localScale.y / 16f) - 0.3f);
     }
 
     public void MovePeople(int scale)
@@ -113,7 +117,7 @@ public class scr_cityMain : MonoBehaviour {
                     peoples--;
                     other_cityMain.peoples++;
                 }
-                yield return new WaitForSeconds(0.06f);
+                yield return new WaitForSeconds(0.03f);
             }
         }
     }
