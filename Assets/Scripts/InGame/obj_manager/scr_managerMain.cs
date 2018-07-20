@@ -10,11 +10,11 @@ public class scr_managerMain : MonoBehaviour {
     Image blackpanel_image;
 
     public int score;
-
     public int cityMany;
 
     //  0.0 ~ 1.0
     public float happyPoint;
+    public GameObject thisCity;
 
     public void GetScore(int point)
     {
