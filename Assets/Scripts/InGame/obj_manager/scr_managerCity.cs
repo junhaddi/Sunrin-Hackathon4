@@ -7,6 +7,7 @@ public class scr_managerCity : MonoBehaviour {
     public int cityAmount = 1;
     public float newTargetDelay = 0;
     public float peopleMoveDelay = 0;
+    public Sprite[] sprites = new Sprite[7];
 
     GameObject cities;
     GameObject city2;
@@ -108,14 +109,38 @@ public class scr_managerCity : MonoBehaviour {
     {
         int cityNum = city.GetComponent<scr_cityMain>().cityNum;
 
-        float angle_before = 360f / cityAmount * cityNum;
-        float angle_after = 360f / (cityAmount + 1) * (cityNum + 1);
+        float angle_before = Mathf.Atan2(-city.transform.position.y, city.transform.position.x) * Mathf.Rad2Deg + 90;
+        float angle_after = 360f / (cityAmount + 1) * (cityNum - cityAmount);
 
-        for (float i = angle_before; i <= angle_after; i += (angle_after - angle_before) / 40f)
+        while (angle_before < 0)
+            angle_before += 360;
+
+        while (angle_before > 360)
+            angle_before -= 360;
+
+        while (angle_after > 360)
+            angle_after -= 360;
+
+        while (angle_after < 0)
+            angle_after += 360;
+
+        if (angle_before < angle_after)
         {
-            city.transform.position = new Vector2(Mathf.Sin(i * Mathf.PI / 180) * 2.1f, Mathf.Cos(i * Mathf.PI / 180) * 2.1f);
+            for (float i = angle_before; i <= angle_after; i += (angle_after - angle_before) / 40f)
+            {
+                city.transform.position = new Vector2(Mathf.Sin(i * Mathf.PI / 180) * 2.1f, Mathf.Cos(i * Mathf.PI / 180) * 2.1f);
 
-            yield return new WaitForSeconds(0.005f);
+                yield return new WaitForSeconds(0.005f);
+            }
+        }
+        else
+        {
+            for (float i = angle_before; i >= angle_after; i += (angle_after - angle_before) / 40f)
+            {
+                city.transform.position = new Vector2(Mathf.Sin(i * Mathf.PI / 180) * 2.1f, Mathf.Cos(i * Mathf.PI / 180) * 2.1f);
+
+                yield return new WaitForSeconds(0.005f);
+            }
         }
     }
 
@@ -130,6 +155,7 @@ public class scr_managerCity : MonoBehaviour {
         NewObj.GetComponent<scr_cityMain>().peoples = 0;
         NewObj.transform.SetParent(cities.transform);
         NewObj.transform.position = new Vector2(0, 2.1f);
+        NewObj.GetComponent<SpriteRenderer>().sprite = sprites[cityAmount];
 
         for (int i = 0; i < cityAmount; i++)
         {

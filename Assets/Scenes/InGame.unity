@@ -608,6 +608,14 @@ MonoBehaviour:
   cityAmount: 0
   newTargetDelay: 0
   peopleMoveDelay: 0
+  sprites:
+  - {fileID: 21300000, guid: 4fc548a8acc307b459b7aeda9e0496cb, type: 3}
+  - {fileID: 21300000, guid: b4a2f1605107f334b8e304ce876b9d46, type: 3}
+  - {fileID: 21300000, guid: ca440886058543049917a51ee08754ee, type: 3}
+  - {fileID: 21300000, guid: a670edc433f67614f875803051260869, type: 3}
+  - {fileID: 21300000, guid: 4627a596f8f80c649ae0eb4f481a959e, type: 3}
+  - {fileID: 21300000, guid: 0e95e10c4379cc54a97e918115600f9d, type: 3}
+  - {fileID: 21300000, guid: 7d6065187c782444a9ad3f875e747434, type: 3}
   pre_city: {fileID: 1451243267902110, guid: 2bced48b178ad884c914b00aa1ba4ce5, type: 2}
 --- !u!1 &1787281325
 GameObject:
