@@ -10,7 +10,32 @@ public class scr_managerMain : MonoBehaviour {
     Image blackpanel_image;
 
     public int score;
+
+    public int cityMany;
+
+    //  0.0 ~ 1.0
     public float happyPoint;
+
+    public void GetScore(int point)
+    {
+        score += point;
+    }
+
+    public void SetHappyPoint()
+    {
+        int _happyPoint = 0;
+        for (int i = 0; i < cityMany; i++)
+        {
+            //_happyPoint += GameObject.Find(1) / cityMany;
+        }
+
+        happyPoint = _happyPoint;
+    }
+
+    public void GameOver()
+    {
+        //GameOver!!
+    }
 
     private void Awake()
     {
