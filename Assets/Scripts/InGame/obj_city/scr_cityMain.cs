@@ -35,7 +35,7 @@ public class scr_cityMain : MonoBehaviour {
     {
         if (managerMain.thisCity && Time.time > nextMove)
         {
-            nextMove = Time.time + moveRate;
+            nextMove += Time.time + moveRate;
             other_city = managerMain.thisCity;
 
             if (other_city.GetComponent<scr_cityMain>().peoples > peoples)
@@ -51,7 +51,6 @@ public class scr_cityMain : MonoBehaviour {
 
             //  Get Score
             GetScore.score += 1;
-            Debug.Log("Drop");
         }
     }
 
@@ -94,8 +93,11 @@ public class scr_cityMain : MonoBehaviour {
         else
             GetComponent<SpriteRenderer>().color = new Color(0.5f, 0.5f, 0.5f);
         text.text = peoples + "%";
-        mask.localScale = new Vector2(4, peoples * 6 / (165 / _citiAmount.cityAmount));
-        mask.localPosition = new Vector2(0, (mask.localScale.y / 16f) - 0.3f);
+        if (peoples * 6 / (165 / _citiAmount.cityAmount) < 0)
+            mask.localScale = new Vector2(4, 0);
+        else
+            mask.localScale = new Vector2(4, peoples * 6 / (165 / _citiAmount.cityAmount));
+        mask.localPosition = new Vector2(0, (mask.localScale.y / 16f) - 0.33f);
     }
 
     public void MovePeople(int scale)
