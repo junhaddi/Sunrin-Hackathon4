@@ -48,7 +48,7 @@ public class scr_cityMain : MonoBehaviour {
                 peoples--;
                 other_cityMain.peoples++;
             }
-            yield return new WaitForSeconds(0.1f);
+            yield return new WaitForSeconds(0.04f);
         }
     }
 }
