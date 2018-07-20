@@ -7,8 +7,8 @@ public class scr_item : MonoBehaviour {
 
     /*  GameSystem
         0 : None
-        1 : City + Load
-        2 : Crime + House
+        1 : City + Road
+        2 : House + Crime
         3 : All
         4 : Fast Drag   */
     public int item = 0;
