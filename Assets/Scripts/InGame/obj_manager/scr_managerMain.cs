@@ -7,13 +7,15 @@ public class scr_managerMain : MonoBehaviour {
 
     GameObject managers;
     GameObject blackpanel;
+    Text _Score;
     Image blackpanel_image;
+    Image _happy_bar;
 
     public int score = 0;
     public int cityMany;
 
     //  0.0 ~ 1.0
-    public float happyPoint;
+    public float happyPoint = 1f;
     public GameObject thisCity;
 
     public void SetHappyPoint()
@@ -38,6 +40,9 @@ public class scr_managerMain : MonoBehaviour {
         managers = GameObject.Find("Managers");
         blackpanel = GameObject.Find("Blackpanel");
         blackpanel_image = blackpanel.GetComponent<Image>();
+
+        _Score = GameObject.Find("Score").GetComponent<Text>();
+        _happy_bar = GameObject.Find("happy_bar").GetComponent<Image>();
     }
 
     private void Start()
@@ -57,5 +62,13 @@ public class scr_managerMain : MonoBehaviour {
 
         //---------------------------------------------------------------[[ 스타트 매니저를 활성화 ]]
         managers.transform.Find("StartManager").gameObject.SetActive(true);
+    }
+
+    private void Update()
+    {
+        //  Set UI
+        _Score.text = "Score\n" + score;
+        Debug.Log(happyPoint);
+        _happy_bar.fillAmount = happyPoint;
     }
 }

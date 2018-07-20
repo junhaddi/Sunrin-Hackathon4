@@ -39,19 +39,24 @@ public class scr_cityMain : MonoBehaviour {
             other_city = managerMain.thisCity;
 
             if (other_city.GetComponent<scr_cityMain>().peoples > peoples)
-                MovePeople(45/(managerCity.cityAmount + 1));
+            {
+                MovePeople(45 / (managerCity.cityAmount + 1));
+
+                GetScore.score += 45 / (managerCity.cityAmount + 1);
+            }
             else
             {
                 float bestPeoples = 100/(managerCity.cityAmount + 1);
                 float people1 = Mathf.Abs(other_city.GetComponent<scr_cityMain>().peoples - bestPeoples);
                 float people2 = Mathf.Abs(peoples - bestPeoples);
                 MovePeople((int)(people1 + people2 / 2 * 0.8f));
+
+                GetScore.score += (int)(people1 + people2 / 2 * 0.8f);
             }
             managerMain.thisCity = null;
 
             //  Get Score
-            GetScore.score += 1;
-            Debug.Log("Drop");
+
         }
     }
 
