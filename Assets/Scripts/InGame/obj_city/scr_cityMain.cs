@@ -25,7 +25,16 @@ public class scr_cityMain : MonoBehaviour {
         if (managerMain.thisCity)
         {
             other_city = managerMain.thisCity;
-            MovePeople(35/(managerCity.cityAmount + 1));
+
+            if (other_city.GetComponent<scr_cityMain>().peoples > peoples)
+                MovePeople(45/(managerCity.cityAmount + 1));
+            else
+            {
+                float bestPeoples = 100/(managerCity.cityAmount + 1);
+                float people1 = Mathf.Abs(other_city.GetComponent<scr_cityMain>().peoples - bestPeoples);
+                float people2 = Mathf.Abs(peoples - bestPeoples);
+                MovePeople((int)(people1 + people2 / 2 * 0.8f));
+            }
             managerMain.thisCity = null;
         }
     }
@@ -63,17 +72,20 @@ public class scr_cityMain : MonoBehaviour {
 
     IEnumerator MovePeopleC(int scale)
     {
-        scr_cityMain other_cityMain = other_city.GetComponent<scr_cityMain>();
-        other_city = null;
-
-        for (int i = 0; i < scale; i++)
+        if (other_city != null)
         {
-            if (peoples >= 1)
+            scr_cityMain other_cityMain = other_city.GetComponent<scr_cityMain>();
+            other_city = null;
+
+            for (int i = 0; i < scale; i++)
             {
-                peoples--;
-                other_cityMain.peoples++;
+                if (peoples >= 1)
+                {
+                    peoples--;
+                    other_cityMain.peoples++;
+                }
+                yield return new WaitForSeconds(0.06f);
             }
-            yield return new WaitForSeconds(0.06f);
         }
     }
 }

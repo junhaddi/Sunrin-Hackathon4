@@ -7,7 +7,9 @@ public class scr_managerCity : MonoBehaviour {
     public int cityAmount = 1;
     public float newTargetDelay = 0;
     public float peopleMoveDelay = 0;
+
     GameObject cities;
+    GameObject city2;
 
     public GameObject pre_city;
 
@@ -20,29 +22,47 @@ public class scr_managerCity : MonoBehaviour {
     public void Update()
     {
         //---------------------------------------------------------------[[ 집중 타겟을 변경 ]]
-        newTargetDelay += Time.deltaTime * 5;
-        if (newTargetDelay >= 15f)
+        newTargetDelay += Time.deltaTime;
+        if (newTargetDelay >= 12f)
         {
-            newTargetDelay -= 15;
+            newTargetDelay -= 12;
             newTarget();
         }
 
         //---------------------------------------------------------------[[ 인구가 이동 ]]
         peopleMoveDelay += Time.deltaTime;
-        if (peopleMoveDelay >= 1f)
+        if (peopleMoveDelay >= 1.6f)
         {
-            peopleMoveDelay -= 1;
+            peopleMoveDelay -= 1.6f;
             for (int i = 0; i < cityAmount; i++)
             {
-                GameObject a = GameObject.Find("obj_city" + i);
+                if (GameObject.Find("obj_city" + i).GetComponent<scr_cityMain>().isTarget)
+                    city2 = GameObject.Find("obj_city" + i);
+            }
 
-                if (Random.Range(0, 10) <= 2)
+            for (int i = 0; i < cityAmount; i++)
+            {
+                if (Random.Range(0, 4) != 1 && cityAmount > 1)
                 {
-                    //  Move Target
-                    if (GameObject.Find("obj_city" + i).GetComponent<scr_cityMain>().name != ("obj_city" + i))
+                    GameObject city1 = GameObject.Find("obj_city" + i);
+
+                    if (Random.Range(0, 10) <= 2)
                     {
-                        a.other_city = managerMain.thisCity;
-                        a.MovePeople(35 / (managerCity.cityAmount + 1));
+                        city1.GetComponent<scr_cityMain>().other_city = city2;
+                        city1.GetComponent<scr_cityMain>().MovePeople(35 / (cityAmount + 1));
+                    }
+                    else
+                    {
+                        int rand;
+                        do
+                        {
+                            rand = Random.Range(0, cityAmount);
+                            if (rand != i)
+                            {
+                                city1.GetComponent<scr_cityMain>().other_city = GameObject.Find("obj_city" + rand);
+                                city1.GetComponent<scr_cityMain>().MovePeople(35 / (cityAmount + 1));
+                            }
+                        } while (rand == i);
                     }
                 }
             }
@@ -107,7 +127,14 @@ public class scr_managerCity : MonoBehaviour {
         GameObject NewObj = Instantiate(pre_city);
         NewObj.name = "obj_city" + cityAmount;
         NewObj.GetComponent<scr_cityMain>().cityNum = cityAmount;
+        NewObj.GetComponent<scr_cityMain>().peoples = 0;
         NewObj.transform.SetParent(cities.transform);
         NewObj.transform.position = new Vector2(0, 2.1f);
+
+        for (int i = 0; i < cityAmount; i++)
+        {
+            GameObject.Find("obj_city" + i).GetComponent<scr_cityMain>().other_city = NewObj;
+            GameObject.Find("obj_city" + i).GetComponent<scr_cityMain>().MovePeople((100 / (cityAmount + 1)) / cityAmount);
+        }
     }
 }
