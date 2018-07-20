@@ -7,10 +7,8 @@ public class scr_cityMain : MonoBehaviour {
     {
         ROAD, HOUSE, NATURE, CRIME, HIGHWAY
     };
-
-    TextMesh text;
-
     public GameObject other_city;
+    public GameObject Line;
     Transform mask;
 
     public int cityNum = 0;
@@ -70,7 +68,6 @@ public class scr_cityMain : MonoBehaviour {
     private void Awake()
     {
         mask = transform.Find("Mask");
-        text = transform.Find("Text").GetComponent<TextMesh>();
         managerMain = GameObject.Find("MainManager").GetComponent<scr_managerMain>();
         managerCity = GameObject.Find("CityManager").GetComponent<scr_managerCity>();
         _citiAmount = GameObject.Find("CityManager").GetComponent<scr_managerCity>();
@@ -95,7 +92,6 @@ public class scr_cityMain : MonoBehaviour {
             GetComponent<SpriteRenderer>().color = new Color(1, 1, 1);
         else
             GetComponent<SpriteRenderer>().color = new Color(0.75f, 0.75f, 0.75f);
-        text.text = peoples + "%";
         
         if (peoples * 6 / (165 / _citiAmount.cityAmount) > 4)
         {
@@ -110,6 +106,37 @@ public class scr_cityMain : MonoBehaviour {
 
     public void MovePeople(int scale)
     {
+        float x = other_city.transform.position.x - transform.position.x;
+        float y = other_city.transform.position.y - transform.position.y;
+
+        GameObject line = Instantiate(Line, new Vector3((other_city.transform.position.x + transform.position.x) / 2, (other_city.transform.position.y + transform.position.y) / 2, 2), Quaternion.Euler(0, 0, Mathf.Atan2(y, x) * Mathf.Rad2Deg));
+        line.transform.localScale = new Vector2(Vector3.Distance(other_city.transform.position, transform.position) / 4f * 10f, scale / 14f);
+
+        switch(cityNum % 7)
+        {
+            case 0:
+                line.GetComponent<SpriteRenderer>().color = new Color(18 / 255f, 18 / 255f, 141 / 255f);
+                break;
+            case 1:
+                line.GetComponent<SpriteRenderer>().color = new Color(131 / 255f, 84 / 255f, 155 / 255f);
+                break;
+            case 2:
+                line.GetComponent<SpriteRenderer>().color = new Color(191 / 255f, 97 / 255f, 146 / 255f);
+                break;
+            case 3:
+                line.GetComponent<SpriteRenderer>().color = new Color(184 / 255f, 191 / 255f, 10 / 255f);
+                break;
+            case 4:
+                line.GetComponent<SpriteRenderer>().color = new Color(24 / 255f, 24 / 255f, 24 / 255f);
+                break;
+            case 5:
+                line.GetComponent<SpriteRenderer>().color = new Color(32 / 255f, 32 / 255f, 106 / 255f);
+                break;
+            case 6:
+                line.GetComponent<SpriteRenderer>().color = new Color(130 / 255f, 94 / 255f, 59 / 255f);
+                break;
+        }
+
         StartCoroutine("MovePeopleC", scale);
     }
     

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class scr_managerCity : MonoBehaviour {
 
-    public int cityAmount = 1;
+    public int cityAmount = 2;
     public float newTargetDelay = 0;
     public float peopleMoveDelay = 0;
     public Sprite[] sprites = new Sprite[7];
@@ -21,7 +21,7 @@ public class scr_managerCity : MonoBehaviour {
 
     public void Awake()
     {
-        cityAmount = 1;
+        cityAmount = 2;
         cities = GameObject.Find("Cities");
     }
 
@@ -173,8 +173,6 @@ public class scr_managerCity : MonoBehaviour {
     IEnumerator PushCity()
     {
         yield return new WaitForSeconds(10f);
-        pushCity();
-        yield return new WaitForSeconds(20f);
         pushCity();
         yield return new WaitForSeconds(20f);
         pushCity();
