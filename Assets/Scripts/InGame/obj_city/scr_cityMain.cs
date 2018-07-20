@@ -20,10 +20,14 @@ public class scr_cityMain : MonoBehaviour {
     scr_managerMain managerMain;
     scr_managerCity managerCity;
 
+    public float moveRate;
+    public float nextMove = 0;
+
     private void OnMouseUp()
     {
-        if (managerMain.thisCity)
+        if (managerMain.thisCity && Time.time > nextMove)
         {
+            nextMove += Time.time + moveRate;
             other_city = managerMain.thisCity;
 
             if (other_city.GetComponent<scr_cityMain>().peoples > peoples)
@@ -58,6 +62,9 @@ public class scr_cityMain : MonoBehaviour {
 
     private void Update()
     {
+        //  Set Move DelayLate
+        moveRate = 8f / GameObject.Find("CityManager").GetComponent<scr_managerCity>().cityAmount;
+
         if (isTarget)
             GetComponent<SpriteRenderer>().color = new Color(1, 1, 1);
         else
