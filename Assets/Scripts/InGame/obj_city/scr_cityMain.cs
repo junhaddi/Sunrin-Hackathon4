@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class scr_cityMain : MonoBehaviour {
+    enum MATTER
+    {
+        ROAD, HOUSE, NATURE, CRIME, HIGHWAY
+    };
 
     TextMesh text;
 
@@ -72,7 +76,15 @@ public class scr_cityMain : MonoBehaviour {
     private void Update()
     {
         //  Set Move DelayLate
-        moveRate = 8f / _citiAmount.cityAmount;
+        if (matter != (int)MATTER.ROAD)
+        {
+            moveRate = 8f / _citiAmount.cityAmount;
+        }
+        else
+        {
+            //  Item Active
+            moveRate = 4f / _citiAmount.cityAmount;
+        }
 
         //  Change Target Color
         if (isTarget)
