@@ -35,7 +35,7 @@ public class scr_cityMain : MonoBehaviour {
     {
         if (managerMain.thisCity && Time.time > nextMove)
         {
-            nextMove += Time.time + moveRate;
+            nextMove = Time.time + moveRate;
             other_city = managerMain.thisCity;
 
             if (other_city.GetComponent<scr_cityMain>().peoples > peoples)
@@ -51,6 +51,7 @@ public class scr_cityMain : MonoBehaviour {
 
             //  Get Score
             GetScore.score += 1;
+            Debug.Log("Drop");
         }
     }
 
