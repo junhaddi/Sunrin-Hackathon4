@@ -10,9 +10,9 @@ public class scr_managerMain : MonoBehaviour {
     Text _Score;
     Image blackpanel_image;
     Image _happy_bar;
+    scr_managerCity _cityAmount; 
 
     public int score = 0;
-    public int cityMany;
 
     //  0.0 ~ 1.0
     public float happyPoint = 1f;
@@ -20,14 +20,22 @@ public class scr_managerMain : MonoBehaviour {
 
     public void SetHappyPoint()
     {
-        float _happyPoint = 0;
-        for (int i = 0; i < cityMany; i++)
+        for (int i = 0; i < _cityAmount.cityAmount; i++)
         {
-            float _city_people = (GameObject.Find("obj_city" + i).GetComponent<scr_cityMain>().peoples);
-            _happyPoint += (1 - _city_people / 100) / cityMany;
+            float a = (GameObject.Find("obj_city" + i).GetComponent<scr_cityMain>().peoples);
+            if (a >= (120 / _cityAmount.cityAmount))
+            {
+                happyPoint -= 3 / 35f * Time.deltaTime;
+                
+            }
+            else
+            {
+                happyPoint += 1 / 100f * Time.deltaTime;
+                if (happyPoint >= 1)
+                    happyPoint = 1;
+            }
+            //happyPoint -= 1 / 10;
         }
-
-        happyPoint = _happyPoint;
     }
 
     public void GameOver()
@@ -43,6 +51,7 @@ public class scr_managerMain : MonoBehaviour {
 
         _Score = GameObject.Find("Score").GetComponent<Text>();
         _happy_bar = GameObject.Find("happy_bar").GetComponent<Image>();
+        _cityAmount = GameObject.Find("CityManager").GetComponent<scr_managerCity>();
     }
 
     private void Start()
@@ -69,5 +78,7 @@ public class scr_managerMain : MonoBehaviour {
         //  Set UI
         _Score.text = "Score\n" + score;
         _happy_bar.fillAmount = happyPoint;
+        SetHappyPoint();
+        Debug.Log(happyPoint);
     }
 }

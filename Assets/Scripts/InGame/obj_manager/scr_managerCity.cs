@@ -29,9 +29,9 @@ public class scr_managerCity : MonoBehaviour {
     {
         //---------------------------------------------------------------[[ 집중 타겟을 변경 ]]
         newTargetDelay += Time.deltaTime;
-        if (newTargetDelay >= 12f)
+        if (newTargetDelay >= 6f)
         {
-            newTargetDelay -= 12;
+            newTargetDelay -= 6f;
             newTarget();
         }
 
