@@ -51,7 +51,6 @@ public class scr_cityMain : MonoBehaviour {
 
             //  Get Score
             GetScore.score += 1;
-            Debug.Log(GetScore.score);
         }
     }
 
@@ -78,14 +77,14 @@ public class scr_cityMain : MonoBehaviour {
     private void Update()
     {
         //  Set Move DelayLate
-        if (matter != (int)MATTER.ROAD)
+        if (matter != (int)MATTER.HIGHWAY)
         {
-            moveRate = 5f / _citiAmount.cityAmount;
+            moveRate = 3f / _citiAmount.cityAmount;
         }
         else
         {
             //  Item Active
-            moveRate = 2f / _citiAmount.cityAmount;
+            moveRate = 1.5f / _citiAmount.cityAmount;
         }
 
         //  Change Target Color
