@@ -104,7 +104,7 @@ public class scr_cityMain : MonoBehaviour {
     {
         StartCoroutine("MovePeopleC", scale);
     }
-
+    
     IEnumerator MovePeopleC(int scale)
     {
         if (other_city != null)

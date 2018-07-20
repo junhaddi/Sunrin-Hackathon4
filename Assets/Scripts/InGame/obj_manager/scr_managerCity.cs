@@ -14,6 +14,11 @@ public class scr_managerCity : MonoBehaviour {
 
     public GameObject pre_city;
 
+    private void Start()
+    {
+        StartCoroutine(PushCity());
+    }
+
     public void Awake()
     {
         cityAmount = 1;
@@ -163,4 +168,16 @@ public class scr_managerCity : MonoBehaviour {
             GameObject.Find("obj_city" + i).GetComponent<scr_cityMain>().MovePeople((100 / (cityAmount + 1)) / cityAmount);
         }
     }
+
+    // 일정 시간마다 도시 추가
+    IEnumerator PushCity()
+    {
+        yield return new WaitForSeconds(20f);
+        pushCity();
+        yield return new WaitForSeconds(30f);
+        pushCity();
+        yield return new WaitForSeconds(40f);
+        pushCity();
+    }
+
 }
