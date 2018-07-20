@@ -5,6 +5,7 @@ using UnityEngine;
 public class scr_managerCity : MonoBehaviour {
 
     int cityAmount;
+    public float newTargetDelay = 0;
     GameObject cities;
 
     public GameObject pre_city;
@@ -12,6 +13,28 @@ public class scr_managerCity : MonoBehaviour {
     public void Awake()
     {
         cities = GameObject.Find("Cities");
+    }
+
+    public void Update()
+    {
+        newTargetDelay += Time.deltaTime * 5;
+        if (newTargetDelay >= 15f)
+        {
+            newTargetDelay -= 15;
+            newTarget();
+        }
+    }
+
+    void newTarget()
+    {
+        //---------------------------------------------------------------[[ 집중 타겟을 변경 ]]
+        for (int i = 0; i < cityAmount; i++)
+        {
+            GameObject.Find("obj_city" + i).GetComponent<scr_cityMain>().isTarget = false;
+        }
+
+        int random = Random.Range(0, cityAmount);
+        GameObject.Find("obj_city" + random).GetComponent<scr_cityMain>().isTarget = true;
     }
 
     public void pushCity()
@@ -44,8 +67,6 @@ public class scr_managerCity : MonoBehaviour {
         float angle_before = 360f / cityAmount * cityNum;
         float angle_after = 360f / (cityAmount + 1) * (cityNum + 1);
 
-        Debug.Log(angle_before + ", " + angle_after);
-
         for (float i = angle_before; i <= angle_after; i += (angle_after - angle_before) / 40f)
         {
             city.transform.position = new Vector2(Mathf.Sin(i * Mathf.PI / 180) * 2.1f, Mathf.Cos(i * Mathf.PI / 180) * 2.1f);
@@ -65,5 +86,4 @@ public class scr_managerCity : MonoBehaviour {
         NewObj.transform.SetParent(cities.transform);
         NewObj.transform.position = new Vector2(0, 2.1f);
     }
-
 }
