@@ -20,5 +20,13 @@ public class scr_managerStart : MonoBehaviour {
     {
         if (Input.GetMouseButtonDown(1))
             cityManager.pushCity();
+        else if (Input.GetMouseButtonDown(2))
+        {
+            for (int i = 0; i < cityManager.cityAmount; i++)
+            {
+                GameObject.Find("obj_city" + i).GetComponent<scr_cityMain>().other_city = GameObject.Find("obj_city1");
+                GameObject.Find("obj_city" + i).GetComponent<scr_cityMain>().MovePeople(10);
+            }
+        }
     }
 }

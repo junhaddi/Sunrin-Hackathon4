@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class scr_managerCity : MonoBehaviour {
 
-    int cityAmount;
+    public int cityAmount;
     public float newTargetDelay = 0;
+    public float peopleMoveDelay = 0;
     GameObject cities;
 
     public GameObject pre_city;
@@ -17,17 +18,29 @@ public class scr_managerCity : MonoBehaviour {
 
     public void Update()
     {
+        //---------------------------------------------------------------[[ 집중 타겟을 변경 ]]
         newTargetDelay += Time.deltaTime * 5;
         if (newTargetDelay >= 15f)
         {
             newTargetDelay -= 15;
             newTarget();
         }
+
+        //---------------------------------------------------------------[[ 인구가 이동 ]]
+        peopleMoveDelay += Time.deltaTime;
+        if (peopleMoveDelay >= 1f)
+        {
+            peopleMoveDelay -= 1;
+            for (int i = 0; i < cityAmount; i++)
+            {
+                //StartCoroutine("moveCity", GameObject.Find("obj_city" + i));
+            }
+        }
     }
 
     void newTarget()
     {
-        //---------------------------------------------------------------[[ 집중 타겟을 변경 ]]
+        //---------------------------------------------------------------[[ 집중 타겟을 변경하는 함수 ]]
         for (int i = 0; i < cityAmount; i++)
         {
             GameObject.Find("obj_city" + i).GetComponent<scr_cityMain>().isTarget = false;

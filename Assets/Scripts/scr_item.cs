@@ -38,19 +38,19 @@ public class scr_item : MonoBehaviour {
             {
                 case 0:
                     //  Reset
-                    inGameSys.드래그쿨타임 = 원래기본값;
+                    //inGameSys.드래그쿨타임 = 원래기본값;
                     break;
                 case 1:
-                    touch_city.교통_주거문제_제거함수();
+                    //touch_city.교통_주거문제_제거함수();
                     break;
                 case 2:
-                    touch_city.범죄_주거문제_제거함수();
+                    //touch_city.범죄_주거문제_제거함수();
                     break;
                 case 3:
-                    touch_city.모든문제_제거함수();
+                    //touch_city.모든문제_제거함수();
                     break;
                 case 4:
-                    inGameSys.드래그쿨타임 = 줄어든값;
+                    //inGameSys.드래그쿨타임 = 줄어든값;
                     break;
             }
         }
