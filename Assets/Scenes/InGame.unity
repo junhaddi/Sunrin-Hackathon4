@@ -156,20 +156,6 @@ Prefab:
       propertyPath: m_Name
       value: obj_city0
       objectReference: {fileID: 0}
-    - target: {fileID: 4594502884949050, guid: 2bced48b178ad884c914b00aa1ba4ce5, type: 2}
-      propertyPath: m_LocalScale.y
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 212308142453143854, guid: 2bced48b178ad884c914b00aa1ba4ce5,
-        type: 2}
-      propertyPath: m_DrawMode
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 212308142453143854, guid: 2bced48b178ad884c914b00aa1ba4ce5,
-        type: 2}
-      propertyPath: m_SpriteTileMode
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2bced48b178ad884c914b00aa1ba4ce5, type: 2}
   m_IsPrefabParent: 0
