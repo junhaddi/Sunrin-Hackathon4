@@ -26,21 +26,24 @@ public class scr_managerMain : MonoBehaviour {
             if (a >= (150 / _cityAmount.cityAmount))
             {
                 happyPoint -= 3 / 35f * Time.deltaTime;
-                
             }
             else
             {
                 happyPoint += 1 / 100f * Time.deltaTime;
                 if (happyPoint >= 1)
                     happyPoint = 1;
+                if (happyPoint <= 0)
+                {
+                    happyPoint = 0;
+                    GameOver();
+                }
             }
-            //happyPoint -= 1 / 10;
         }
     }
 
     public void GameOver()
-    { 
-        //GameOver!!
+    {
+        StartCoroutine("black");
     }
 
     private void Awake()
@@ -79,5 +82,20 @@ public class scr_managerMain : MonoBehaviour {
         _Score.text = score + "";
         _happy_bar.fillAmount = happyPoint;
         SetHappyPoint();
+    }
+
+    IEnumerator black()
+    {
+        for (int i = 0; i <= 100; i += 3)
+        {
+            blackpanel_image.color = new Color(0.09f, 0, 0.09f, i / 100f);
+            yield return new WaitForSeconds(0.005f);
+        }
+        blackpanel_image.color = new Color(0, 0, 0, 1);
+
+        yield return new WaitForSeconds(0.1f);
+
+        GameObject.Find("Canvas").transform.Find("Text").gameObject.SetActive(true);
+        GameObject.Find("Canvas").transform.Find("Text").GetComponent<Text>().text = "Your Score Is " + score;
     }
 }

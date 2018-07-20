@@ -9,6 +9,7 @@ public class scr_managerCity : MonoBehaviour {
     public float peopleMoveDelay = 0;
     public Sprite[] sprites = new Sprite[7];
 
+    scr_managerMain ManagerMain;
     GameObject cities;
     GameObject city2;
 
@@ -23,56 +24,63 @@ public class scr_managerCity : MonoBehaviour {
     {
         cityAmount = 2;
         cities = GameObject.Find("Cities");
+        ManagerMain = GameObject.Find("MainManager").GetComponent<scr_managerMain>();
     }
 
     public void Update()
     {
-        //---------------------------------------------------------------[[ 집중 타겟을 변경 ]]
-        newTargetDelay += Time.deltaTime;
-        if (newTargetDelay >= 6f)
+        if (ManagerMain.happyPoint > 0.01f)
         {
-            newTargetDelay -= 6f;
-            newTarget();
-        }
-
-        //---------------------------------------------------------------[[ 인구가 이동 ]]
-        peopleMoveDelay += Time.deltaTime;
-        if (peopleMoveDelay >= 1.2f)
-        {
-            peopleMoveDelay -= 1.2f;
-            for (int i = 0; i < cityAmount; i++)
+            //---------------------------------------------------------------[[ 집중 타겟을 변경 ]]
+            newTargetDelay += Time.deltaTime;
+            if (newTargetDelay >= 6f)
             {
-                if (GameObject.Find("obj_city" + i).GetComponent<scr_cityMain>().isTarget)
-                    city2 = GameObject.Find("obj_city" + i);
+                newTargetDelay -= 6f;
+                newTarget();
             }
 
-            for (int i = 0; i < cityAmount; i++)
+            //---------------------------------------------------------------[[ 인구가 이동 ]]
+            peopleMoveDelay += Time.deltaTime;
+            if (peopleMoveDelay >= 1.2f)
             {
-                if (Random.Range(0, 6) != 1 && cityAmount > 1)
+                peopleMoveDelay -= 1.2f;
+                for (int i = 0; i < cityAmount; i++)
                 {
-                    GameObject city1 = GameObject.Find("obj_city" + i);
+                    if (GameObject.Find("obj_city" + i).GetComponent<scr_cityMain>().isTarget)
+                        city2 = GameObject.Find("obj_city" + i);
+                }
 
-                    if (Random.Range(0, 10) <= 2)
+                for (int i = 0; i < cityAmount; i++)
+                {
+                    if (Random.Range(0, 6) != 1 && cityAmount > 1)
                     {
-                        city1.GetComponent<scr_cityMain>().other_city = city2;
-                        city1.GetComponent<scr_cityMain>().MovePeople(35 / (cityAmount + 1));
-                    }
-                    else
-                    {
-                        int rand;
-                        do
+                        GameObject city1 = GameObject.Find("obj_city" + i);
+
+                        if (Random.Range(0, 10) <= 2)
                         {
-                            rand = Random.Range(0, cityAmount);
-                            if (rand != i)
+                            city1.GetComponent<scr_cityMain>().other_city = city2;
+                            city1.GetComponent<scr_cityMain>().MovePeople(35 / (cityAmount + 1));
+                        }
+                        else
+                        {
+                            int rand;
+                            do
                             {
-                                city1.GetComponent<scr_cityMain>().other_city = GameObject.Find("obj_city" + rand);
-                                city1.GetComponent<scr_cityMain>().MovePeople(35 / (cityAmount + 1));
-                            }
-                        } while (rand == i);
+                                rand = Random.Range(0, cityAmount);
+                                if (rand != i)
+                                {
+                                    city1.GetComponent<scr_cityMain>().other_city = GameObject.Find("obj_city" + rand);
+                                    city1.GetComponent<scr_cityMain>().MovePeople(35 / (cityAmount + 1));
+                                }
+                            } while (rand == i);
+                        }
                     }
                 }
             }
         }
+
+
+
     }
 
     void newTarget()

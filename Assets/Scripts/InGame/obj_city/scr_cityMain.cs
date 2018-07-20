@@ -76,28 +76,33 @@ public class scr_cityMain : MonoBehaviour {
 
     private void Update()
     {
-        //  Set Move DelayLate
-        if (matter != (int)MATTER.HIGHWAY)
+        if (managerMain.happyPoint > 0.01f)
         {
-            moveRate = 3f / _citiAmount.cityAmount;
-        }
-        else
-        {
-            //  Item Active
-            moveRate = 1.5f / _citiAmount.cityAmount;
+            //  Set Move DelayLate
+            if (matter != (int)MATTER.HIGHWAY)
+            {
+                moveRate = 3f / _citiAmount.cityAmount;
+            }
+            else
+            {
+                //  Item Active
+                moveRate = 1.5f / _citiAmount.cityAmount;
+            }
+
+            //  Change Target Color
+
+            if (peoples * 6 / (165 / _citiAmount.cityAmount) > 4)
+            {
+                mask.localScale = new Vector2(4, 4);
+            }
+            else
+            {
+                mask.localScale = new Vector2(4, peoples * 6 / (165 / _citiAmount.cityAmount));
+            }
+            mask.localPosition = new Vector2(0, (mask.localScale.y / 16f) - 0.3f);
         }
 
-        //  Change Target Color
-        
-        if (peoples * 6 / (165 / _citiAmount.cityAmount) > 4)
-        {
-            mask.localScale = new Vector2(4, 4);
-        }
-        else
-        {
-            mask.localScale = new Vector2(4, peoples * 6 / (165 / _citiAmount.cityAmount));
-        }
-        mask.localPosition = new Vector2(0, (mask.localScale.y / 16f) - 0.3f);
+
     }
 
     public void MovePeople(int scale)
