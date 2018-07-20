@@ -94,9 +94,17 @@ public class scr_cityMain : MonoBehaviour {
         if (isTarget)
             GetComponent<SpriteRenderer>().color = new Color(1, 1, 1);
         else
-            GetComponent<SpriteRenderer>().color = new Color(0.5f, 0.5f, 0.5f);
+            GetComponent<SpriteRenderer>().color = new Color(0.75f, 0.75f, 0.75f);
         text.text = peoples + "%";
-        mask.localScale = new Vector2(4, peoples * 6 / (165 / _citiAmount.cityAmount));
+        
+        if (peoples * 6 / (165 / _citiAmount.cityAmount) > 4)
+        {
+            mask.localScale = new Vector2(4, 4);
+        }
+        else
+        {
+            mask.localScale = new Vector2(4, peoples * 6 / (165 / _citiAmount.cityAmount));
+        }
         mask.localPosition = new Vector2(0, (mask.localScale.y / 16f) - 0.3f);
     }
 
@@ -119,7 +127,7 @@ public class scr_cityMain : MonoBehaviour {
                     peoples--;
                     other_cityMain.peoples++;
                 }
-                yield return new WaitForSeconds(0.03f);
+                yield return new WaitForSeconds(0.02f);
             }
         }
     }

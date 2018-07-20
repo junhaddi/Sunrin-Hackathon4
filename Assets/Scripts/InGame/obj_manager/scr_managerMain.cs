@@ -23,7 +23,7 @@ public class scr_managerMain : MonoBehaviour {
         for (int i = 0; i < _cityAmount.cityAmount; i++)
         {
             float a = (GameObject.Find("obj_city" + i).GetComponent<scr_cityMain>().peoples);
-            if (a >= (120 / _cityAmount.cityAmount))
+            if (a >= (150 / _cityAmount.cityAmount))
             {
                 happyPoint -= 3 / 35f * Time.deltaTime;
                 

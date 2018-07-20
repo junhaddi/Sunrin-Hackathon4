@@ -37,9 +37,9 @@ public class scr_managerCity : MonoBehaviour {
 
         //---------------------------------------------------------------[[ 인구가 이동 ]]
         peopleMoveDelay += Time.deltaTime;
-        if (peopleMoveDelay >= 1.6f)
+        if (peopleMoveDelay >= 1.2f)
         {
-            peopleMoveDelay -= 1.6f;
+            peopleMoveDelay -= 1.2f;
             for (int i = 0; i < cityAmount; i++)
             {
                 if (GameObject.Find("obj_city" + i).GetComponent<scr_cityMain>().isTarget)
@@ -48,7 +48,7 @@ public class scr_managerCity : MonoBehaviour {
 
             for (int i = 0; i < cityAmount; i++)
             {
-                if (Random.Range(0, 4) != 1 && cityAmount > 1)
+                if (Random.Range(0, 6) != 1 && cityAmount > 1)
                 {
                     GameObject city1 = GameObject.Find("obj_city" + i);
 
@@ -160,7 +160,7 @@ public class scr_managerCity : MonoBehaviour {
         NewObj.GetComponent<scr_cityMain>().peoples = 0;
         NewObj.transform.SetParent(cities.transform);
         NewObj.transform.position = new Vector2(0, 2.1f);
-        NewObj.GetComponent<SpriteRenderer>().sprite = sprites[cityAmount];
+        NewObj.GetComponent<SpriteRenderer>().sprite = sprites[cityAmount % 7];
 
         for (int i = 0; i < cityAmount; i++)
         {
@@ -172,11 +172,15 @@ public class scr_managerCity : MonoBehaviour {
     // 일정 시간마다 도시 추가
     IEnumerator PushCity()
     {
+        yield return new WaitForSeconds(10f);
+        pushCity();
         yield return new WaitForSeconds(20f);
         pushCity();
-        yield return new WaitForSeconds(30f);
+        yield return new WaitForSeconds(20f);
         pushCity();
-        yield return new WaitForSeconds(40f);
+        yield return new WaitForSeconds(20f);
+        pushCity();
+        yield return new WaitForSeconds(20f);
         pushCity();
     }
 
