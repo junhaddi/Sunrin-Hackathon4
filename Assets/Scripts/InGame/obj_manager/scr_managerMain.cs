@@ -23,10 +23,16 @@ public class scr_managerMain : MonoBehaviour {
         for (int i = 0; i < _cityAmount.cityAmount; i++)
         {
             float a = (GameObject.Find("obj_city" + i).GetComponent<scr_cityMain>().peoples);
-            if (a >= (100 / a))
+            if (a >= (120 / _cityAmount.cityAmount))
             {
-                happyPoint += 1 / 10;
-                Debug.Log("holy");
+                happyPoint -= 3 / 35f * Time.deltaTime;
+                
+            }
+            else
+            {
+                happyPoint += 1 / 100f * Time.deltaTime;
+                if (happyPoint >= 1)
+                    happyPoint = 1;
             }
             //happyPoint -= 1 / 10;
         }
@@ -72,5 +78,7 @@ public class scr_managerMain : MonoBehaviour {
         //  Set UI
         _Score.text = "Score\n" + score;
         _happy_bar.fillAmount = happyPoint;
+        SetHappyPoint();
+        Debug.Log(happyPoint);
     }
 }
