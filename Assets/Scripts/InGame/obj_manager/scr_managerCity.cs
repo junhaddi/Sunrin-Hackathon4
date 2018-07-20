@@ -34,7 +34,17 @@ public class scr_managerCity : MonoBehaviour {
             peopleMoveDelay -= 1;
             for (int i = 0; i < cityAmount; i++)
             {
-                //StartCoroutine("moveCity", GameObject.Find("obj_city" + i));
+                GameObject a = GameObject.Find("obj_city" + i);
+
+                if (Random.Range(0, 10) <= 2)
+                {
+                    //  Move Target
+                    if (GameObject.Find("obj_city" + i).GetComponent<scr_cityMain>().name != ("obj_city" + i))
+                    {
+                        a.other_city = managerMain.thisCity;
+                        a.MovePeople(35 / (managerCity.cityAmount + 1));
+                    }
+                }
             }
         }
     }

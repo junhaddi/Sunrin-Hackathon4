@@ -23,17 +23,18 @@ public class scr_managerMain : MonoBehaviour {
 
     public void SetHappyPoint()
     {
-        int _happyPoint = 0;
+        float _happyPoint = 0;
         for (int i = 0; i < cityMany; i++)
         {
-            //_happyPoint += GameObject.Find(1) / cityMany;
+            float _city_people = (GameObject.Find("obj_city" + i).GetComponent<scr_cityMain>().peoples);
+            _happyPoint += (1 - _city_people / 100) / cityMany;
         }
 
         happyPoint = _happyPoint;
     }
 
     public void GameOver()
-    {
+    { 
         //GameOver!!
     }
 
