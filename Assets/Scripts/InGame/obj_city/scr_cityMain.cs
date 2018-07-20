@@ -54,9 +54,6 @@ public class scr_cityMain : MonoBehaviour {
                 GetScore.score += (int)(people1 + people2 / 2 * 0.8f);
             }
             managerMain.thisCity = null;
-
-            //  Get Score
-
         }
     }
 

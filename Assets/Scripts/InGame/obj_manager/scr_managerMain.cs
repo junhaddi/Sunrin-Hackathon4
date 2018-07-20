@@ -68,7 +68,6 @@ public class scr_managerMain : MonoBehaviour {
     {
         //  Set UI
         _Score.text = "Score\n" + score;
-        Debug.Log(happyPoint);
         _happy_bar.fillAmount = happyPoint;
     }
 }
