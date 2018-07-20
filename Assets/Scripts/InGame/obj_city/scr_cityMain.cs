@@ -78,12 +78,12 @@ public class scr_cityMain : MonoBehaviour {
         //  Set Move DelayLate
         if (matter != (int)MATTER.ROAD)
         {
-            moveRate = 8f / _citiAmount.cityAmount;
+            moveRate = 5f / _citiAmount.cityAmount;
         }
         else
         {
             //  Item Active
-            moveRate = 4f / _citiAmount.cityAmount;
+            moveRate = 2f / _citiAmount.cityAmount;
         }
 
         //  Change Target Color
